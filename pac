@@ -102,7 +102,8 @@ var domains = {
     "golang.org": 1,
     "tensorflow.org": 1,
     "wikimedia.org": 1,
-    "wikipedia.org": 1
+    "wikipedia.org": 1,
+    "epochtimes.com": 1
 };
 var hosts = [
     "scholar.google.com",
