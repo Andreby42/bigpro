@@ -22,7 +22,7 @@
 		<baidu.ocr.version>4.12.0</baidu.ocr.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		<common.lang.version>2.6</common.lang.version>
-		<common.collections.version>3.2.1</common.collections.version>
+		<common.collections.version>3.2.2</common.collections.version>
 		<wechat.common.api.version>4.7.1-SNAPSHOT</wechat.common.api.version>
 	</properties>
 
