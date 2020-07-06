@@ -1,0 +1,75 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    accesslog:
+      directory: logs
+      enabled: true
+  port: 8080
+
+spring:
+  application:
+      name: global-platform-extend
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${db.mysql.url}
+    username: ${db.mysql.username}
+    password: ${db.mysql.password}
+    tomcat:
+      initial-size: ${db.mysql.initialSize}
+      max-active: ${db.mysql.maxActive}
+      min-idle: ${db.mysql.minIdle}
+      max-wait: ${db.mysql.maxWait}
+      test-while-idle: ${db.mysql.testWhileIdle}
+      test-on-borrow: ${db.mysql.testOnBorrow}
+      test-on-return: ${db.mysql.testOnReturn}
+      time-between-eviction-runs-millis: ${db.mysql.timeBetweenEvictionRunsMillis}
+      min-evictable-idle-time-millis: ${db.mysql.minEvictableIdleTimeMillis}
+      validation-query: select 1
+  
+  redis:
+    host: ${cache.redis.host}
+    port: ${cache.redis.port}
+    password: ${cache.redis.password}
+
+  rabbitmq:
+    addresses: ${mq.rabbitmq.addresses}
+    userName: ${mq.rabbitmq.username}
+    password: ${mq.rabbitmq.password}
+    virtualHost: ${mq.rabbitmq.virtualhost}
+        
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: cn.com.thc.*.entity
+  global-config:
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: none
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: NOT_EMPTY
+      #capital-mode: true
+      # Sequence序列接口实现类配置
+      #key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      #自定义填充策略接口实现
+      #meta-object-handler: com.baomidou.springboot.xxx
+      #自定义SQL注入器
+#      sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+      #数据库大写下划线转换
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+
+kuaidi100:
+  key: DxSERVTB7690
+  customer: A92484FB66269D0002F91A34A1ED4F46

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"                                                                                                                 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">                                                                                                                           
+<mapper namespace="com.thc.platform.modules.ocr.dao.OcrInspectionResultItemMapper" >
+                                                                                                                                                                               
+	<!-- 映射配置 -->                                                                                                                                                           
+	<resultMap id="BaseResultMap" type="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" >
+	    <result column="id" property="id" jdbcType="VARCHAR" />                                                                                                               
+        <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="ocr_inspection_result_id" property="ocrInspectionResultId" jdbcType="VARCHAR" />
+        <result column="no" property="no" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="result" property="result" jdbcType="VARCHAR" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="ref" property="ref" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="creator" property="creator" jdbcType="VARCHAR" />
+        <result column="updater" property="updater" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    </resultMap>                                                                                                                                                               
+                                                                                                                                                                               
+    <!-- 修改信息  -->                                                                                                                                                         
+    <update id="updateOcrInspectionResultItem" parameterType="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" >                                                                                                     
+    	update ocr_inspection_result_item                                                                                                                                                          
+    	<set>                                                                                                                                                                   
+      	<if test="tenantId != null" >
+        	tenant_id = #{tenantId, jdbcType=VARCHAR},
+      	</if>
+      	<if test="orgId != null" >
+        	org_id = #{orgId, jdbcType=VARCHAR},
+      	</if>
+      	<if test="ocrInspectionResultId != null" >
+        	ocr_inspection_result_id = #{ocrInspectionResultId, jdbcType=VARCHAR},
+      	</if>
+      	<if test="no != null" >
+        	no = #{no, jdbcType=VARCHAR},
+      	</if>
+      	<if test="code != null" >
+        	code = #{code, jdbcType=VARCHAR},
+      	</if>
+      	<if test="name != null" >
+        	name = #{name, jdbcType=VARCHAR},
+      	</if>
+      	<if test="result != null" >
+        	result = #{result, jdbcType=VARCHAR},
+      	</if>
+      	<if test="unit != null" >
+        	unit = #{unit, jdbcType=VARCHAR},
+      	</if>
+      	<if test="ref != null" >
+        	ref = #{ref, jdbcType=VARCHAR},
+      	</if>
+      	<if test="status != null" >
+        	status = #{status, jdbcType=INTEGER},
+      	</if>
+      	<if test="creator != null" >
+        	creator = #{creator, jdbcType=VARCHAR},
+      	</if>
+      	<if test="updater != null" >
+        	updater = #{updater, jdbcType=VARCHAR},
+      	</if>
+      	<if test="createTime != null" >
+        	create_time = #{createTime, jdbcType=TIMESTAMP},
+      	</if>
+      	<if test="updateTime != null" >
+        	update_time = #{updateTime, jdbcType=VARCHAR},
+      	</if>
+    	</set>                                                                                                                                                                  
+    	where id = #{id, jdbcType=VARCHAR}                                                                                                                                      
+  	</update>                                                                                                                                                                   
+    <!-- 通过主键ID刪除实体信息 -->                                                                                                                                            
+    <delete id="deleteOcrInspectionResultItemById" parameterType="java.lang.String" >                                                                        
+	    delete                                                                                                                                                                  
+	    from ocr_inspection_result_item                                                                                                                                                            
+	    where id = #{id,jdbcType=VARCHAR}                                                                                                                                       
+  	</delete>                                                                                                                                                                   
+                                                                                                                                                                               
+    <!-- 条件查询数据条数  -->                                                                                                                                             
+  	<select id="getOcrInspectionResultItemsNum" resultType="java.lang.Integer" parameterType="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" >                                                                            
+	    select                                                                                                                                                                  
+	     count(1)                                                                                                                                 
+	    from ocr_inspection_result_item a                                                                                                                                                            
+	    where 1=1                                                                                                                                                            
+	    <include refid="base_column_where" />                                                                                                                                 
+  	</select>                                                                                                                                                                   
+    <!-- 条件查询分页数据显示  -->                                                                                                                                             
+  	<select id="getOcrInspectionResultItems" resultMap="BaseResultMap" parameterType="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" >                                                                            
+	    select                                                                                                                                                                  
+	     <include refid="base_column_list" />                                                                                                                                 
+	    from ocr_inspection_result_item a                                                                                                                                                            
+	    where 1=1                                                                                                                                                            
+	    <include refid="base_column_where" />                                                                                                                                 
+	    order by a.id                                                                                                                                                             
+	    <if test="offset!=null and pagesize!=null">                                                                                                                           
+	  		limit #{offset}, #{pagesize}                                                                                                                                        
+	    </if>                                                                                                                                                                   
+  	</select>                                                                                                                                                                   
+                                                                                                                                                                               
+    <!-- 通过主键ID查询实体信息 -->                                                                                                                                            
+    <select id="getOcrInspectionResultItemById" resultMap="BaseResultMap" parameterType="java.lang.String" >                                                                        
+	    select                                                                                                                                                                  
+	    	<include refid="base_column_list" />                                                                                                                              
+	    from ocr_inspection_result_item a                                                                                                                                                            
+	    where a.id = #{id,jdbcType=VARCHAR}                                                                                                                                       
+  	</select>                                                                                                                                                                   
+	<!-- 通过主键ID查询实体信息 -->                                                                                                                                                       
+    <select id="getOnlyOcrInspectionResultItem" resultType="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" parameterType="java.lang.String" >                                         
+	    select                                                                                                                                                                            
+	    	<include refid="object_column_list" />                                                                                                                                      
+	    from ocr_inspection_result_item a                                                                                                                                                              
+	    where a.id = #{id,jdbcType=VARCHAR}                                                                                                                                               
+  	</select>                                                                                                                                                                         
+    <!-- 插入实体信息 -->                                                                                                                                                      
+    <insert id="insertOcrInspectionResultItem" parameterType="com.thc.platform.modules.ocr.bean.OcrInspectionResultItem" useGeneratedKeys="true" keyProperty="id">                                                         
+      <selectKey keyProperty="id" resultType="string" order="BEFORE">select uuid() as id from dual</selectKey> 
+	    insert into ocr_inspection_result_item                                                                                                                                                     
+	    <trim prefix="(" suffix=")" suffixOverrides="," >                                                                                                                 
+		    <if test="id != null" >
+                id,
+		    </if>
+		    <if test="tenantId != null" >
+                tenant_id,
+		    </if>
+		    <if test="orgId != null" >
+                org_id,
+		    </if>
+		    <if test="ocrInspectionResultId != null" >
+                ocr_inspection_result_id,
+		    </if>
+		    <if test="no != null" >
+                no,
+		    </if>
+		    <if test="code != null" >
+                code,
+		    </if>
+		    <if test="name != null" >
+                name,
+		    </if>
+		    <if test="result != null" >
+                result,
+		    </if>
+		    <if test="unit != null" >
+                unit,
+		    </if>
+		    <if test="ref != null" >
+                ref,
+		    </if>
+		    <if test="status != null" >
+                status,
+		    </if>
+		    <if test="creator != null" >
+                creator,
+		    </if>
+		    <if test="updater != null" >
+                updater,
+		    </if>
+		    <if test="createTime != null" >
+                create_time,
+		    </if>
+		    <if test="updateTime != null" >
+                update_time,
+		    </if>
+	    </trim>                                                                                                                                                                 
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >                                                                                                          
+		    <if test="id != null" >
+		    	#{id},
+		    </if>
+		    <if test="tenantId != null" >
+		    	#{tenantId},
+		    </if>
+		    <if test="orgId != null" >
+		    	#{orgId},
+		    </if>
+		    <if test="ocrInspectionResultId != null" >
+		    	#{ocrInspectionResultId},
+		    </if>
+		    <if test="no != null" >
+		    	#{no},
+		    </if>
+		    <if test="code != null" >
+		    	#{code},
+		    </if>
+		    <if test="name != null" >
+		    	#{name},
+		    </if>
+		    <if test="result != null" >
+		    	#{result},
+		    </if>
+		    <if test="unit != null" >
+		    	#{unit},
+		    </if>
+		    <if test="ref != null" >
+		    	#{ref},
+		    </if>
+		    <if test="status != null" >
+		    	#{status},
+		    </if>
+		    <if test="creator != null" >
+		    	#{creator},
+		    </if>
+		    <if test="updater != null" >
+		    	#{updater},
+		    </if>
+		    <if test="createTime != null" >
+		    	#{createTime},
+		    </if>
+		    <if test="updateTime != null" >
+		    	#{updateTime},
+		    </if>
+	    </trim>                                                                                                                                                                 
+  	</insert>                                                                                                                                                                   
+                                                                                                                                                                               
+  	<!-- 转换*加快查询效率 -->                                                                                                                                                  
+    <sql id="base_column_list" >                                                                                                                                             
+	     a.id, a.tenant_id, a.org_id, a.ocr_inspection_result_id, a.no, a.code, a.name, a.result, a.unit, a.ref, a.status, a.creator, a.updater, a.create_time, a.update_time
+  	</sql>                                                                                                                                                                      
+	    <!-- 直接映射对象字段 -->                                                                                                                                                  
+    <sql id="object_column_list" > 
+	     a.id as id, a.tenant_id as tenantId, a.org_id as orgId, a.ocr_inspection_result_id as ocrInspectionResultId, a.no as no, a.code as code, a.name as name, a.result as result, a.unit as unit, a.ref as ref, a.status as status, a.creator as creator, a.updater as updater, a.create_time as createTime, a.update_time as updateTime
+  	</sql>                                                                                                                                                                      
+  	                                                                                                                                                                            
+  	<!-- 查询条件 -->                                                                                                                                                           
+    <sql id="base_column_where">                                                                                                                                             
+ 	 	<if test="id !=null ">
+	 		and a.id = #{id}
+	 	</if>
+ 	 	<if test="tenantId !=null ">
+	 		and a.tenant_id = #{tenantId}
+	 	</if>
+ 	 	<if test="orgId !=null ">
+	 		and a.org_id = #{orgId}
+	 	</if>
+ 	 	<if test="ocrInspectionResultId !=null ">
+	 		and a.ocr_inspection_result_id = #{ocrInspectionResultId}
+	 	</if>
+ 	 	<if test="no !=null ">
+	 		and a.no = #{no}
+	 	</if>
+ 	 	<if test="code !=null ">
+	 		and a.code = #{code}
+	 	</if>
+ 	 	<if test="name !=null ">
+	 		and a.name = #{name}
+	 	</if>
+ 	 	<if test="result !=null ">
+	 		and a.result = #{result}
+	 	</if>
+ 	 	<if test="unit !=null ">
+	 		and a.unit = #{unit}
+	 	</if>
+ 	 	<if test="ref !=null ">
+	 		and a.ref = #{ref}
+	 	</if>
+ 	 	<if test="status !=null ">
+	 		and a.status = #{status}
+	 	</if>
+ 	 	<if test="creator !=null ">
+	 		and a.creator = #{creator}
+	 	</if>
+ 	 	<if test="updater !=null ">
+	 		and a.updater = #{updater}
+	 	</if>
+ 	 	<if test="createTime !=null ">
+	 		and a.create_time = #{createTime}
+	 	</if>
+ 	 	<if test="updateTime !=null ">
+	 		and a.update_time = #{updateTime}
+	 	</if>
+    </sql>
+
+	<!--getByOcrInspectionResultId-->
+
+	<select id="getByOcrInspectionResultId" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list" />
+		from ocr_inspection_result_item a
+	  	where a.ocr_inspection_result_id = #{ocrInspectionResultId}
+	</select>
+
+    <select id="deleteByOcrInspectionResultId">
+		delete from ocr_inspection_result_item where ocr_inspection_result_id = #{ocrInspectionResultId}
+	</select>
+
+	<select id="findByResultIdIn" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list"/>
+		from ocr_inspection_result_item a
+		where a.ocr_inspection_result_id in
+		<foreach collection="ocrInspectionResultIds" item="resultId" open="(" close=")" separator=",">
+			#{resultId}
+		</foreach>
+	</select>
+</mapper>                                                                                                                                                                    

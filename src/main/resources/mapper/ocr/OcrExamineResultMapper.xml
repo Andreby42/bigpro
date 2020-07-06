@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thc.platform.modules.ocr.dao.OcrExamineResultMapper" >
+
+	<!-- 映射配置 -->
+	<resultMap id="BaseResultMap" type="com.thc.platform.modules.ocr.bean.OcrExamineResult" >
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+		<result column="org_id" property="orgId" jdbcType="VARCHAR" />
+		<result column="ocr_record_id" property="ocrRecordId" jdbcType="VARCHAR" />
+		<result column="result_type" property="resultType" jdbcType="INTEGER" />
+		<result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+		<result column="medical_number" property="medicalNumber" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="diagnose" property="diagnose" jdbcType="VARCHAR" />
+		<result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
+		<result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+		<result column="project_name" property="projectName" jdbcType="VARCHAR" />
+		<result column="specimen_name" property="specimenName" jdbcType="VARCHAR" />
+		<result column="application_dept" property="applicationDept" jdbcType="VARCHAR" />
+		<result column="given_name" property="givenName" jdbcType="VARCHAR" />
+		<result column="report_date" property="reportDate" jdbcType="VARCHAR"/>
+		<result column="reviewer_name" property="reviewerName" jdbcType="VARCHAR" />
+		<result column="reporter_name" property="reporterName" jdbcType="VARCHAR" />
+		<result column="examiner_name" property="examinerName" jdbcType="VARCHAR" />
+		<result column="examine_date" property="examineDate" jdbcType="VARCHAR"/>
+		<result column="examine_position" property="examinePosition" jdbcType="VARCHAR" />
+		<result column="examine_method" property="examineMethod" jdbcType="VARCHAR" />
+		<result column="examine_findings" property="examineFindings" jdbcType="VARCHAR" />
+		<result column="examine_impression" property="examineImpression" jdbcType="VARCHAR" />
+		<result column="examine_suggestion" property="examineSuggestion" jdbcType="VARCHAR" />
+		<result column="creator" property="creator" jdbcType="VARCHAR" />
+		<result column="updater" property="updater" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+		<!--411 版本添加就诊流水号和就诊类型-->
+		<result column="visit_serial_type_code" property="visitSerialTypeCode" jdbcType="VARCHAR"/>
+		<result column="visit_serial_type_name" property="visitSerialTypeName" jdbcType="VARCHAR"/>
+		<result column="visit_serial_number" property="visitSerialNumber" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<!-- 修改信息  -->
+	<update id="updateOcrExamineResult" parameterType="com.thc.platform.modules.ocr.bean.OcrExamineResult" >
+		update ocr_examine_result
+		<set>
+			<if test="tenantId != null" >
+				tenant_id = #{tenantId, jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null" >
+				org_id = #{orgId, jdbcType=VARCHAR},
+			</if>
+			<if test="ocrRecordId != null" >
+				ocr_record_id = #{ocrRecordId, jdbcType=VARCHAR},
+			</if>
+			<if test="resultType != null" >
+				result_type = #{resultType, jdbcType=INTEGER},
+			</if>
+			<if test="patientId != null" >
+				patient_id = #{patientId, jdbcType=VARCHAR},
+			</if>
+			<if test="medicalNumber != null" >
+				medical_number = #{medicalNumber, jdbcType=VARCHAR},
+			</if>
+			<if test="name != null" >
+				name = #{name, jdbcType=VARCHAR},
+			</if>
+			<if test="age != null" >
+				age = #{age, jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null" >
+				sex = #{sex, jdbcType=VARCHAR},
+			</if>
+			<if test="diagnose != null" >
+				diagnose = #{diagnose, jdbcType=VARCHAR},
+			</if>
+			<if test="hospitalName != null" >
+				hospital_name = #{hospitalName, jdbcType=VARCHAR},
+			</if>
+			<if test="deptName != null" >
+				dept_name = #{deptName, jdbcType=VARCHAR},
+			</if>
+			<if test="projectName != null" >
+				project_name = #{projectName, jdbcType=VARCHAR},
+			</if>
+			<if test="specimenName != null" >
+				specimen_name = #{specimenName, jdbcType=VARCHAR},
+			</if>
+			<if test="applicationDept != null" >
+				application_dept = #{applicationDept, jdbcType=VARCHAR},
+			</if>
+			<if test="givenName != null" >
+				given_name = #{givenName, jdbcType=VARCHAR},
+			</if>
+			<if test="reportDate != null" >
+				report_date = #{reportDate, jdbcType=VARCHAR},
+			</if>
+			<if test="reviewerName != null" >
+				reviewer_name = #{reviewerName, jdbcType=VARCHAR},
+			</if>
+			<if test="reporterName != null" >
+				reporter_name = #{reporterName, jdbcType=VARCHAR},
+			</if>
+			<if test="examinerName != null" >
+				examiner_name = #{examinerName, jdbcType=VARCHAR},
+			</if>
+			<if test="examineDate != null" >
+				examine_date = #{examineDate, jdbcType=VARCHAR},
+			</if>
+			<if test="examinePosition != null" >
+				examine_position = #{examinePosition, jdbcType=VARCHAR},
+			</if>
+			<if test="examineMethod != null" >
+				examine_method = #{examineMethod, jdbcType=VARCHAR},
+			</if>
+			<if test="examineFindings != null" >
+				examine_findings = #{examineFindings, jdbcType=VARCHAR},
+			</if>
+			<if test="examineImpression != null" >
+				examine_impression = #{examineImpression, jdbcType=VARCHAR},
+			</if>
+			<if test="examineSuggestion != null" >
+				examine_suggestion = #{examineSuggestion, jdbcType=VARCHAR},
+			</if>
+			<if test="creator != null" >
+				creator = #{creator, jdbcType=VARCHAR},
+			</if>
+			<if test="updater != null" >
+				updater = #{updater, jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				create_time = #{createTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null" >
+				update_time = #{updateTime, jdbcType=VARCHAR},
+			</if>
+
+			<if test="visitSerialTypeCode != null">
+				visit_serial_type_code = #{visitSerialTypeCode},
+			</if>
+
+			<if test="visitSerialTypeName != null">
+				visit_serial_type_name = #{visitSerialTypeName},
+			</if>
+
+			<if test="visitSerialNumber != null">
+				visit_serial_number = #{visitSerialNumber},
+			</if>
+		</set>
+		where id = #{id, jdbcType=VARCHAR}
+	</update>
+	<!-- 通过主键ID刪除实体信息 -->
+	<delete id="deleteOcrExamineResultById" parameterType="java.lang.String" >
+	    delete
+	    from ocr_examine_result
+	    where id = #{id,jdbcType=VARCHAR}
+  	</delete>
+
+	<!-- 条件查询数据条数  -->
+	<select id="getOcrExamineResultsNum" resultType="java.lang.Integer" parameterType="com.thc.platform.modules.ocr.bean.OcrExamineResult" >
+		select
+		count(1)
+		from ocr_examine_result a
+		where 1=1
+		<include refid="base_column_where" />
+	</select>
+	<!-- 条件查询分页数据显示  -->
+	<select id="getOcrExamineResults" resultMap="BaseResultMap" parameterType="com.thc.platform.modules.ocr.bean.OcrExamineResult" >
+		select
+		<include refid="base_column_list" />
+		from ocr_examine_result a
+		where 1=1
+		<include refid="base_column_where" />
+		order by a.id
+		<if test="offset!=null and pagesize!=null">
+			limit #{offset}, #{pagesize}
+		</if>
+	</select>
+
+	<!-- 通过主键ID查询实体信息 -->
+	<select id="getOcrExamineResultById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		select
+		<include refid="base_column_list" />
+		from ocr_examine_result a
+		where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	<!-- 通过主键ID查询实体信息 -->
+	<select id="getOnlyOcrExamineResult" resultType="com.thc.platform.modules.ocr.bean.OcrExamineResult" parameterType="java.lang.String" >
+		select
+		<include refid="base_column_list"/>
+		from ocr_examine_result a
+		where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	<!-- 插入实体信息 -->
+	<insert id="insertOcrExamineResult" parameterType="com.thc.platform.modules.ocr.bean.OcrExamineResult" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">select uuid() as id from dual</selectKey>
+		insert into ocr_examine_result
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="tenantId != null" >
+				tenant_id,
+			</if>
+			<if test="orgId != null" >
+				org_id,
+			</if>
+			<if test="ocrRecordId != null" >
+				ocr_record_id,
+			</if>
+			<if test="resultType != null" >
+				result_type,
+			</if>
+			<if test="patientId != null" >
+				patient_id,
+			</if>
+			<if test="medicalNumber != null" >
+				medical_number,
+			</if>
+			<if test="name != null" >
+				name,
+			</if>
+			<if test="age != null" >
+				age,
+			</if>
+			<if test="sex != null" >
+				sex,
+			</if>
+			<if test="diagnose != null" >
+				diagnose,
+			</if>
+			<if test="hospitalName != null" >
+				hospital_name,
+			</if>
+			<if test="deptName != null" >
+				dept_name,
+			</if>
+			<if test="projectName != null" >
+				project_name,
+			</if>
+			<if test="specimenName != null" >
+				specimen_name,
+			</if>
+			<if test="applicationDept != null" >
+				application_dept,
+			</if>
+			<if test="givenName != null" >
+				given_name,
+			</if>
+			<if test="reportDate != null" >
+				report_date,
+			</if>
+			<if test="reviewerName != null" >
+				reviewer_name,
+			</if>
+			<if test="reporterName != null" >
+				reporter_name,
+			</if>
+			<if test="examinerName != null" >
+				examiner_name,
+			</if>
+			<if test="examineDate != null" >
+				examine_date,
+			</if>
+			<if test="examinePosition != null" >
+				examine_position,
+			</if>
+			<if test="examineMethod != null" >
+				examine_method,
+			</if>
+			<if test="examineFindings != null" >
+				examine_findings,
+			</if>
+			<if test="examineImpression != null" >
+				examine_impression,
+			</if>
+			<if test="examineSuggestion != null" >
+				examine_suggestion,
+			</if>
+			<if test="creator != null" >
+				creator,
+			</if>
+			<if test="updater != null" >
+				updater,
+			</if>
+			<if test="createTime != null" >
+				create_time,
+			</if>
+			<if test="updateTime != null" >
+				update_time,
+			</if>
+
+			<if test="visitSerialTypeCode != null">
+				visit_serial_type_code,
+			</if>
+
+			<if test="visitSerialTypeName != null">
+				visit_serial_type_name,
+			</if>
+
+			<if test="visitSerialNumber != null">
+				visit_serial_number,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id},
+			</if>
+			<if test="tenantId != null" >
+				#{tenantId},
+			</if>
+			<if test="orgId != null" >
+				#{orgId},
+			</if>
+			<if test="ocrRecordId != null" >
+				#{ocrRecordId},
+			</if>
+			<if test="resultType != null" >
+				#{resultType},
+			</if>
+			<if test="patientId != null" >
+				#{patientId},
+			</if>
+			<if test="medicalNumber != null" >
+				#{medicalNumber},
+			</if>
+			<if test="name != null" >
+				#{name},
+			</if>
+			<if test="age != null" >
+				#{age},
+			</if>
+			<if test="sex != null" >
+				#{sex},
+			</if>
+			<if test="diagnose != null" >
+				#{diagnose},
+			</if>
+			<if test="hospitalName != null" >
+				#{hospitalName},
+			</if>
+			<if test="deptName != null" >
+				#{deptName},
+			</if>
+			<if test="projectName != null" >
+				#{projectName},
+			</if>
+			<if test="specimenName != null" >
+				#{specimenName},
+			</if>
+			<if test="applicationDept != null" >
+				#{applicationDept},
+			</if>
+			<if test="givenName != null" >
+				#{givenName},
+			</if>
+			<if test="reportDate != null" >
+				#{reportDate},
+			</if>
+			<if test="reviewerName != null" >
+				#{reviewerName},
+			</if>
+			<if test="reporterName != null" >
+				#{reporterName},
+			</if>
+			<if test="examinerName != null" >
+				#{examinerName},
+			</if>
+			<if test="examineDate != null" >
+				#{examineDate},
+			</if>
+			<if test="examinePosition != null" >
+				#{examinePosition},
+			</if>
+			<if test="examineMethod != null" >
+				#{examineMethod},
+			</if>
+			<if test="examineFindings != null" >
+				#{examineFindings},
+			</if>
+			<if test="examineImpression != null" >
+				#{examineImpression},
+			</if>
+			<if test="examineSuggestion != null" >
+				#{examineSuggestion},
+			</if>
+			<if test="creator != null" >
+				#{creator},
+			</if>
+			<if test="updater != null" >
+				#{updater},
+			</if>
+			<if test="createTime != null" >
+				#{createTime},
+			</if>
+			<if test="updateTime != null" >
+				#{updateTime},
+			</if>
+
+			<if test="visitSerialTypeCode != null">
+				#{visitSerialTypeCode},
+			</if>
+
+			<if test="visitSerialTypeName != null">
+				#{visitSerialTypeName},
+			</if>
+
+			<if test="visitSerialNumber != null">
+				#{visitSerialNumber},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 转换*加快查询效率 -->
+	<sql id="base_column_list" >
+	     a.id, a.tenant_id, a.org_id, a.ocr_record_id, a.result_type, a.patient_id, a.medical_number, a.name, a.age, a.sex, a.diagnose, a.hospital_name, a.dept_name, a.project_name, a.specimen_name, a.application_dept, a.given_name, a.report_date, a.reviewer_name, a.reporter_name, a.examiner_name, a.examine_date, a.examine_position, a.examine_method, a.examine_findings, a.examine_impression, a.examine_suggestion, a.creator, a.updater, a.create_time, a.update_time,
+	     visit_serial_type_code, visit_serial_type_name, visit_serial_number
+  	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="base_column_where">
+		<if test="id !=null ">
+			and a.id = #{id}
+		</if>
+		<if test="tenantId !=null ">
+			and a.tenant_id = #{tenantId}
+		</if>
+		<if test="orgId !=null ">
+			and a.org_id = #{orgId}
+		</if>
+		<if test="ocrRecordId !=null ">
+			and a.ocr_record_id = #{ocrRecordId}
+		</if>
+		<if test="resultType !=null ">
+			and a.result_type = #{resultType}
+		</if>
+		<if test="patientId !=null ">
+			and a.patient_id = #{patientId}
+		</if>
+		<if test="medicalNumber !=null ">
+			and a.medical_number = #{medicalNumber}
+		</if>
+		<if test="name !=null ">
+			and a.name = #{name}
+		</if>
+		<if test="age !=null ">
+			and a.age = #{age}
+		</if>
+		<if test="sex !=null ">
+			and a.sex = #{sex}
+		</if>
+		<if test="diagnose !=null ">
+			and a.diagnose = #{diagnose}
+		</if>
+		<if test="hospitalName !=null ">
+			and a.hospital_name = #{hospitalName}
+		</if>
+		<if test="deptName !=null ">
+			and a.dept_name = #{deptName}
+		</if>
+		<if test="projectName !=null ">
+			and a.project_name = #{projectName}
+		</if>
+		<if test="specimenName !=null ">
+			and a.specimen_name = #{specimenName}
+		</if>
+		<if test="applicationDept !=null ">
+			and a.application_dept = #{applicationDept}
+		</if>
+		<if test="givenName !=null ">
+			and a.given_name = #{givenName}
+		</if>
+		<if test="reportDate !=null ">
+			and a.report_date = #{reportDate}
+		</if>
+		<if test="reviewerName !=null ">
+			and a.reviewer_name = #{reviewerName}
+		</if>
+		<if test="reporterName !=null ">
+			and a.reporter_name = #{reporterName}
+		</if>
+		<if test="examinerName !=null ">
+			and a.examiner_name = #{examinerName}
+		</if>
+		<if test="examineDate !=null ">
+			and a.examine_date = #{examineDate}
+		</if>
+		<if test="examinePosition !=null ">
+			and a.examine_position = #{examinePosition}
+		</if>
+		<if test="examineMethod !=null ">
+			and a.examine_method = #{examineMethod}
+		</if>
+		<if test="examineFindings !=null ">
+			and a.examine_findings = #{examineFindings}
+		</if>
+		<if test="examineImpression !=null ">
+			and a.examine_impression = #{examineImpression}
+		</if>
+		<if test="examineSuggestion !=null ">
+			and a.examine_suggestion = #{examineSuggestion}
+		</if>
+		<if test="creator !=null ">
+			and a.creator = #{creator}
+		</if>
+		<if test="updater !=null ">
+			and a.updater = #{updater}
+		</if>
+		<if test="createTime !=null ">
+			and a.create_time = #{createTime}
+		</if>
+		<if test="updateTime !=null ">
+			and a.update_time = #{updateTime}
+		</if>
+
+		<if test="visitSerialTypeCode != null">
+			and visit_serial_type_code = #{visitSerialTypeCode}
+		</if>
+
+		<if test="visitSerialTypeName != null">
+			and visit_serial_type_name = #{visitSerialTypeName}
+		</if>
+
+		<if test="visitSerialNumber != null">
+			and visit_serial_number = #{visitSerialNumber}
+		</if>
+	</sql>
+
+
+	<select id="getByOcrRecordIdIn" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list" />
+		from ocr_examine_result a
+		where a.ocr_record_id in
+		<foreach collection="ocrRecordIds" item="ocrRecordId" open="(" close=")" separator=",">
+			#{ocrRecordId}
+		</foreach>
+	</select>
+
+	<select id="getByOcrRecordId" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list" />
+		from ocr_examine_result a
+		where a.ocr_record_id = #{ocrRecordId}
+	</select>
+</mapper>                                                                                                                                                                    

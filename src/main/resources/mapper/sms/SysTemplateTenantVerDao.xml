@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>                                                                                                                                    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"                                                                                                                 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">                                                                                                                           
+<mapper namespace="com.thc.platform.modules.sms.dao.SysTemplateTenantVerDao" >                                                                                                                               
+
+	<select id="listPage" resultType="map">
+		select ver.sys_template_id sysTemplateId 
+			, ver.tenant_id tenantId
+		    , sys.code code
+			, sys.sms_type smsType
+			, sys.name name
+			, ver.content content
+			, ver.modify_user_id modifyUserId
+			, ver.modify_user_name modifyUserName
+			, ver.modify_time modifyTime
+		from sms_sys_template_tenant_ver ver
+		
+		left join sms_sys_template sys
+		on sys.id = ver.sys_template_id
+		
+		where ver.tenant_id = #{tenantId}
+		
+		<if test="code != null" >
+        	and sys.code = #{code}
+      	</if>
+      	
+      	<if test="smsType != null" >
+        	and sys.sms_type = #{smsType}
+      	</if>
+      	
+      	<if test="name != null" >
+        	and sys.name = #{name}
+      	</if>
+      	limit #{offset}, #{pagesize}
+	</select>
+	
+	<select id="listPageCount" resultType="int">
+		select count(ver.sys_template_id) totalCount
+		from sms_sys_template_tenant_ver ver
+		
+		left join sms_sys_template sys
+		on sys.id = ver.sys_template_id
+		
+		where ver.tenant_id = #{tenantId}
+		
+		<if test="code != null" >
+        	and sys.code = #{code}
+      	</if>
+      	
+      	<if test="smsType != null" >
+        	and sys.sms_type = #{smsType}
+      	</if>
+      	
+      	<if test="name != null" >
+        	and sys.name = #{name}
+      	</if>
+	</select>
+	
+</mapper>                                                                                                                                                                    

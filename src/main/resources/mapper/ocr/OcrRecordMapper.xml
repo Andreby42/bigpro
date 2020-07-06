@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thc.platform.modules.ocr.dao.OcrRecordMapper">
+
+    <!-- 映射配置 -->
+    <resultMap id="BaseResultMap" type="com.thc.platform.modules.ocr.bean.OcrRecord">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="tenant_id" property="tenantId" jdbcType="VARCHAR"/>
+        <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="source_type" property="sourceType" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="result" property="result" jdbcType="INTEGER"/>
+        <result column="template_sign" property="templateSign" jdbcType="VARCHAR"/>
+        <result column="template_name" property="templateName" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="VARCHAR"/>
+        <result column="error_msg" property="errorMsg" jdbcType="VARCHAR"/>
+        <result column="operator_type" property="operatorType" jdbcType="INTEGER"/>
+        <result column="operator_id" property="operatorId" jdbcType="VARCHAR"/>
+        <result column="operator_name" property="operatorName" jdbcType="VARCHAR"/>
+        <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="creator_name" property="creatorName" jdbcType="VARCHAR"/>
+        <result column="updater" property="updater" jdbcType="VARCHAR"/>
+        <result column="updater_name" property="updaterName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 修改信息  -->
+    <update id="updateOcrRecord" parameterType="com.thc.platform.modules.ocr.bean.OcrRecord">
+        update ocr_record
+        <set>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId, jdbcType=VARCHAR},
+            </if>
+            <if test="tenantName != null">
+                tenant_name = #{tenantName, jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId, jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName, jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType, jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type, jdbcType=INTEGER},
+            </if>
+            <if test="result != null">
+                result = #{result, jdbcType=INTEGER},
+            </if>
+            <if test="templateSign != null">
+                template_sign = #{templateSign, jdbcType=VARCHAR},
+            </if>
+            <if test="templateName != null">
+                template_name = #{templateName, jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score, jdbcType=VARCHAR},
+            </if>
+            <if test="errorMsg != null">
+                error_msg = #{errorMsg, jdbcType=VARCHAR},
+            </if>
+            <if test="operatorType != null">
+                operator_type = #{operatorType, jdbcType=INTEGER},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId, jdbcType=VARCHAR},
+            </if>
+            <if test="operatorName != null">
+                operator_name = #{operatorName, jdbcType=VARCHAR},
+            </if>
+            <if test="operationDate != null">
+                operation_date = #{operationDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                creator = #{creator, jdbcType=VARCHAR},
+            </if>
+            <if test="creatorName != null">
+                creator_name = #{creatorName, jdbcType=VARCHAR},
+            </if>
+            <if test="updater != null">
+                updater = #{updater, jdbcType=VARCHAR},
+            </if>
+            <if test="updaterName != null">
+                updater_name = #{updaterName, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id, jdbcType=VARCHAR}
+    </update>
+    <!-- 通过主键ID刪除实体信息 -->
+    <delete id="deleteOcrRecordById" parameterType="java.lang.String">                                                                        
+	    delete                                                                                                                                                                  
+	    from ocr_record                                                                                                                                                            
+	    where id = #{id,jdbcType=VARCHAR}                                                                                                                                       
+  	</delete>
+
+    <!-- 条件查询数据条数  -->
+    <select id="getOcrRecordsNum" resultType="java.lang.Integer"
+            parameterType="com.thc.platform.modules.ocr.bean.OcrRecord">
+        select
+        count(1)
+        from ocr_record a
+        where 1=1
+        <include refid="base_column_where"/>
+    </select>
+    <!-- 条件查询分页数据显示  -->
+    <select id="getOcrRecords" resultMap="BaseResultMap" parameterType="com.thc.platform.modules.ocr.bean.OcrRecord">
+        select
+        <include refid="base_column_list"/>
+        from ocr_record a
+        where 1=1
+        <include refid="base_column_where"/>
+        order by a.operation_date DESC
+        <if test="offset!=null and pagesize!=null">
+            limit #{offset}, #{pagesize}
+        </if>
+    </select>
+
+    <!-- 通过主键ID查询实体信息 -->
+    <select id="getOcrRecordById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="base_column_list"/>
+        from ocr_record a
+        where a.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 通过主键ID查询实体信息 -->
+    <select id="getOnlyOcrRecord" resultType="com.thc.platform.modules.ocr.bean.OcrRecord"
+            parameterType="java.lang.String">
+        select
+        <include refid="object_column_list"/>
+        from ocr_record a
+        where a.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 插入实体信息 -->
+    <insert id="insertOcrRecord" parameterType="com.thc.platform.modules.ocr.bean.OcrRecord" useGeneratedKeys="true"
+            keyProperty="id">
+        <selectKey keyProperty="id" resultType="string" order="BEFORE">select uuid() as id from dual</selectKey>
+        insert into ocr_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="tenantName != null">
+                tenant_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="templateSign != null">
+                template_sign,
+            </if>
+            <if test="templateName != null">
+                template_name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="errorMsg != null">
+                error_msg,
+            </if>
+            <if test="operatorType != null">
+                operator_type,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="operatorName != null">
+                operator_name,
+            </if>
+            <if test="operationDate != null">
+                operation_date,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="creatorName != null">
+                creator_name,
+            </if>
+            <if test="updater != null">
+                updater,
+            </if>
+            <if test="updaterName != null">
+                updater_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId},
+            </if>
+            <if test="tenantName != null">
+                #{tenantName},
+            </if>
+            <if test="orgId != null">
+                #{orgId},
+            </if>
+            <if test="orgName != null">
+                #{orgName},
+            </if>
+            <if test="url != null">
+                #{url},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="result != null">
+                #{result},
+            </if>
+            <if test="templateSign != null">
+                #{templateSign},
+            </if>
+            <if test="templateName != null">
+                #{templateName},
+            </if>
+            <if test="score != null">
+                #{score},
+            </if>
+            <if test="errorMsg != null">
+                #{errorMsg},
+            </if>
+            <if test="operatorType != null">
+                #{operatorType},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId},
+            </if>
+            <if test="operatorName != null">
+                #{operatorName},
+            </if>
+            <if test="operationDate != null">
+                #{operationDate},
+            </if>
+            <if test="creator != null">
+                #{creator},
+            </if>
+            <if test="creatorName != null">
+                #{creatorName},
+            </if>
+            <if test="updater != null">
+                #{updater},
+            </if>
+            <if test="updaterName != null">
+                #{updaterName},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 转换*加快查询效率 -->
+    <sql id="base_column_list">                                                                                                                                             
+	     a.id, a.tenant_id, a.tenant_name, a.org_id, a.org_name, a.url, a.source_type, a.type, a.result, a.template_sign, a.template_name, a.score, a.error_msg, a.operator_type, a.operator_id, a.operator_name, a.operation_date, a.creator, a.creator_name, a.updater, a.updater_name, a.create_time, a.update_time
+  	</sql>
+    <!-- 直接映射对象字段 -->
+    <sql id="object_column_list"> 
+	     a.id as id, a.tenant_id as tenantId, a.tenant_name as tenant_name, a.org_id as orgId, a.org_name as org_name,
+	     a.url as url, a.source_type as sourceType, a.type as type, a.result as result, a.template_sign as templateSign, a.template_name as templateName, a.score as score, a.error_msg as errorMsg, a.operator_type as operatorType, a.operator_id as operatorId, a.operator_name as operatorName, a.operation_date as operationDate, a.creator as creator, a.creator_name as creatorName, a.updater as updater, a.updater_name as updaterName, a.create_time as createTime, a.update_time as updateTime
+  	</sql>
+
+    <!-- 查询条件 -->
+    <sql id="base_column_where">
+        <if test="id !=null ">
+            and a.id = #{id}
+        </if>
+        <if test="tenantId !=null ">
+            and a.tenant_id = #{tenantId}
+        </if>
+        <if test="orgId !=null ">
+            and a.org_id = #{orgId}
+        </if>
+        <if test="url !=null ">
+            and a.url = #{url}
+        </if>
+        <if test="sourceType !=null ">
+            and a.source_type = #{sourceType}
+        </if>
+        <if test="type !=null ">
+            and a.type = #{type}
+        </if>
+        <if test="result !=null ">
+            and a.result = #{result}
+        </if>
+        <if test="templateSign !=null ">
+            and a.template_sign = #{templateSign}
+        </if>
+        <if test="templateName !=null ">
+            and a.template_name = #{templateName}
+        </if>
+        <if test="score !=null ">
+            and a.score = #{score}
+        </if>
+        <if test="errorMsg !=null ">
+            and a.error_msg = #{errorMsg}
+        </if>
+        <if test="operatorType !=null ">
+            and a.operator_type = #{operatorType}
+        </if>
+        <if test="operatorId !=null ">
+            and a.operator_id = #{operatorId}
+        </if>
+        <if test="operatorName !=null ">
+            and a.operator_name = #{operatorName}
+        </if>
+        <if test="operationDate !=null ">
+            and a.operation_date = #{operationDate}
+        </if>
+        <if test="creator !=null ">
+            and a.creator = #{creator}
+        </if>
+        <if test="creatorName !=null ">
+            and a.creator_name = #{creatorName}
+        </if>
+        <if test="updater !=null ">
+            and a.updater = #{updater}
+        </if>
+        <if test="updaterName !=null ">
+            and a.updater_name = #{updaterName}
+        </if>
+        <if test="createTime !=null ">
+            and a.create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            and a.update_time = #{updateTime}
+        </if>
+        <if test="operationStartDate != null">
+            and <![CDATA[ a.operation_date >= #{operationStartDate}]]>
+        </if>
+        <if test="operationEndDate != null">
+            and <![CDATA[ a.operation_date <= #{operationEndDate}]]>
+        </if>
+    </sql>
+
+    <select id="getUserUploadRecord" resultMap="BaseResultMap">
+        select t.* from (
+        select
+        <include refid="base_column_list"/>
+        from ocr_record a
+        where a.id in (select ocr_record_id from ocr_inspection_result oir where oir.result_type = 2)
+        <include refid="base_column_where"/>
+        union
+        select
+        <include refid="base_column_list"/>
+        from ocr_record a
+        where a.id in (select ocr_record_id from ocr_examine_result oer where oer.result_type = 2)
+        <include refid="base_column_where"/>
+        ) t
+        order by t.operation_date desc
+        <if test="offset!=null and pagesize!=null">
+            limit #{offset}, #{pagesize}
+        </if>
+    </select>
+
+    <select id="getCountByTenantIdAndOrgId" resultType="com.thc.platform.modules.ocr.bean.OcrInvokeStatistical">
+    select uuid() as id, tenant_id as tenantId, org_id as orgId,
+    count(id) as `number`, tenant_name as tenantName, org_name as orgName,
+    1 as `type`
+    from ocr_record
+    where result = 1 and operation_date like concat(#{stDay},'%')
+    GROUP BY tenant_id, org_id,tenant_name, org_name
+    </select>
+
+</mapper>                                                                                                                                                                    

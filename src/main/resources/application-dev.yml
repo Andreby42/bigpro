@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /global-platform-extend
+
+spring:
+  application:
+    name: global-platform-extend-zl
+
+db:
+  mysql:
+    url: jdbc:mysql://mysql.thc-dev-ucbj-devglobal.svc.syzx.thc.local:3306/thc_global_platform_extend?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&serverTimezone=GMT%2b8
+    username: thc_global_platform_extend
+    password: p8bkdkGKbtanWdS7
+    initialSize: 5
+    maxActive: 100
+    minIdle: 3
+    maxWait: 60000
+    testOnBorrow: true
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 300000
+    minEvictableIdleTimeMillis: 1800000
+
+cache:
+  redis:
+    database: 0
+    host: redis.thc-dev-ucbj-devglobal.svc.syzx.thc.local
+    port: 6379
+    password: 5hy7Wbsx78adWerj
+    timeout: 6000  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        Min-idle: 5       # 连接池中的最小空闲连接
+
+
+mq:
+  rabbitmq:
+    addresses: rabbitmq.thc-dev-ucbj-devglobal.svc.syzx.thc.local:5672
+    username: mq_user
+    password: 6lSTxJstbar0ng2I
+    virtualhost: /
+
+eureka:
+  instance:
+    ip-address: global-platform.thc-dev-ucbj-devglobal.svc.syzx.thc.local
+    prefer-ip-address: true
+    instance-id: global-platform.thc-dev-ucbj-devglobal.svc.syzx.thc.local:7007
+  client:
+    service-url:
+      defaultZone: http://eureka-0.eureka.thc-dev-ucbj-devglobal.svc.syzx.thc.local:8080/eureka/
+
+log:
+  level:
+    root: DEBUG
+
+# 本环境中的相关信息
+envInfo:
+  envDomain: http://devglobal.everjiankang.com.cn
+
+#微信开放平台参数
+wechat-open:
+  appId: wx245deb3e5d1d5b66
+  appSecret: 6bf1fe7a4e34810b4996655e268348dc
+  token: thccare
+  aesKey: Ag7S9onSrXj0l3XIMUIQW5SsMJmczHhGkBGA2QyVTG8

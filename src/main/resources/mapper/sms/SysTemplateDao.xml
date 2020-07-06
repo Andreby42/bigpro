@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>                                                                                                                                    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"                                                                                                                 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">                                                                                                                           
+<mapper namespace="com.thc.platform.modules.sms.dao.SysTemplateDao" >                                                                                                                               
+
+	<select id="listPage" resultType="com.thc.platform.modules.sms.entity.SysTemplateEntity">
+		select sys.id id 
+		    , sys.code code
+			, sys.sms_type smsType
+			, sys.name name
+			, sys.content content
+			
+			, sys.modify_user_id modifyUserId
+			, sys.modify_user_name modifyUserName
+			, sys.modify_time modifyTime
+			
+			
+			, sys.creator_id creatorId
+			, sys.creator_name creatorName
+			, sys.create_time creatorTime
+			
+		from sms_sys_template sys
+		
+		left join (
+			select * from sms_sys_template_tenant_ver 
+		<if test="tenantId != null" >
+	   		where tenant_id = #{tenantId}
+       	</if>
+		) ver
+		on sys.id = ver.sys_template_id
+		
+		where 1 = 1
+		
+		<if test="code != null" >
+        	and sys.code = #{code}
+      	</if>
+      	
+      	<if test="smsType != null" >
+        	and sys.sms_type = #{smsType}
+      	</if>
+      	
+      	<if test="name != null" >
+        	and sys.name = #{name}
+      	</if>
+      	
+      	<if test="tenantId != null" >
+        	and ver.tenant_id is null
+      	</if>
+      	
+      	limit #{offset}, #{pagesize}
+	</select>
+	
+	<select id="listPageCount" resultType="int">
+		select count(id) totalCount
+			
+		from sms_sys_template sys
+		
+		left join (
+			select * from sms_sys_template_tenant_ver 
+		<if test="tenantId != null" >
+	   		where tenant_id = #{tenantId}
+       	</if>
+		) ver
+		on sys.id = ver.sys_template_id
+		
+		where 1 = 1
+		
+		<if test="code != null" >
+        	and sys.code = #{code}
+      	</if>
+      	
+      	<if test="smsType != null" >
+        	and sys.sms_type = #{smsType}
+      	</if>
+      	
+      	<if test="name != null" >
+        	and sys.name = #{name}
+      	</if>
+      	
+      	<if test="tenantId != null" >
+        	and ver.tenant_id is null
+      	</if>
+	</select>
+	
+</mapper>                                                                                                                                                                    

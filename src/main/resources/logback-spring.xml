@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 minutes">
+    <springProperty scope="context" name="logLevel" source="log.level"/>
+    <springProperty scope="context" name="logPath" source="log.path"/>
+    <springProperty scope="context" name="applicationName" source="spring.application.name"/>
+
+    <property name="LOG_HOME" value="${logPath}/custom/"/>
+
+
+    <!-- 控制台输出 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- WARN -->
+    <appender name="error"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>  只记录error级别的日志
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter> -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>  <!-- 只记录error级别的日志 -->
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/exception.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/exception.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}]|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 应用 -->
+    <appender name="server" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/server.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/server.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 第三方 -->
+    <appender name="3rd" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/3rd.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/3rd.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- op操作 -->
+    <appender name="op" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/op.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/op.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- feign操作 -->
+    <appender name="feign" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/feign.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/feign.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%logger{30}|%msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!-- 项目action层操作的日志 -->
+    <logger name="op" level="${logLevel}"
+            additivity="false">
+        <appender-ref ref="op"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <!-- 项目feign层操作的日志 -->
+    <logger name="feign" level="${logLevel}"
+            additivity="false">
+        <appender-ref ref="feign"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <!-- 项目自己配置日志 -->
+    <logger name="com.thc.global-platform" level="${logLevel}" additivity="false">
+        <appender-ref ref="server"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <root level="${logLevel}">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="error"/>
+    </root>
+
+</configuration>
