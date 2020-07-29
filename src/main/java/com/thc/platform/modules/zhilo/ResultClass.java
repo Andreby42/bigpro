@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class ResultClass {
-    public static void main(String[] args) throws UnsupportedEncodingException {
+    public static void main(String[] args) {
         String str =new String("73.25".getBytes(StandardCharsets.UTF_8));
         for (int i = 0; i < 100000000; i++) {
             str = md2(str);
